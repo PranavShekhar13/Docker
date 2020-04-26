@@ -1,0 +1,91 @@
+<% include partials/header %>
+
+
+
+<style type="text/css">
+    body {
+      background-color: #fff;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .code {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+
+
+
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui green header">
+        <i class="code icon"></i>
+        <div class="content">
+          Signup!
+        </div>
+      </h2>
+      <form class="ui large form" action="/register" method="POST">
+        <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="username" placeholder="Username" onkeyup="nospaces(this)">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input id="password" type="password" name="password" placeholder="Password">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input  id="confirm_password"  type= "password" name="confirm_password" placeholder="Confirm-Password">
+            </div>
+          </div>
+          <input class="ui fluid large green submit button" type="submit" name="SignUp!" value="SignUp">
+        </div>
+  
+        <div class="ui error message"></div>
+  
+      </form>
+  
+      <div class="ui message">
+        Already have an account? <a href="/login">Login</a>
+      </div>
+    </div>
+  </div>
+
+<!--Password Confirm-->
+
+<script>
+    var password = document.getElementById("password");
+    var confirm_password = document.getElementById("confirm_password");
+    
+    function validatePassword(){
+      if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+            confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+    
+    function nospaces(t){
+
+    if( t.value.match(/\s/g) || t.value.match(/\./g)  ){
+        alert('Username Cannot Have Spaces or Full Stops');
+        t.value= (t.value.replace(/\s/g,'') .replace(/\./g,''));
+        }
+
+    }
+</script>
+
+
+<% include partials/footer %>
